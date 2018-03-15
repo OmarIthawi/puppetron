@@ -1,6 +1,11 @@
 FROM cheeaun/puppeteer:1.1.1
-COPY . /app
-RUN cd /app && yarn --production --pure-lockfile
-EXPOSE 3000
+RUN mkdir /app
 WORKDIR /app
+
+COPY package.json yarn.lock /app/
+RUN yarn --production --pure-lockfile
+
+COPY . /app
+
+EXPOSE 3000
 CMD yarn start
